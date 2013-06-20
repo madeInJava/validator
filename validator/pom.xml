@@ -3,9 +3,30 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.madeInJava</groupId>
 	<artifactId>validator</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+
+    <name>Validator</name>
+    <inceptionYear>2013</inceptionYear>
+	<organization>
+		<name>Union Group</name>
+	</organization>
+	<developers>
+		<developer>
+			<name>
+	        Joao Vitor Zenaro
+			</name>
+		</developer>
+		<developer>
+			<name>
+			Renan Johanssen de Paula
+			</name>
+		</developer>
+	</developers>
+
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/main/test</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
