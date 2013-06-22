@@ -5,7 +5,7 @@ import br.com.madeInJava.validate.Validator;
 public class App {
 	public static void main(String[] args) {
 
-		String value = "estaEhUmaValidacaoDe@EMail.com";
+		String value = "estaEhUmaValidaasda@sd.com";
 
 		// Validação através de Boolean
 		Validator.getEmailValidator().isValid(value);

@@ -6,23 +6,31 @@
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-    <name>Validator</name>
-    <inceptionYear>2013</inceptionYear>
+	<name>Validator</name>
+	<inceptionYear>2013</inceptionYear>
 	<organization>
 		<name>Union Group</name>
 	</organization>
 	<developers>
 		<developer>
 			<name>
-	        Joao Vitor Zenaro
+				Joao Vitor Zenaro
 			</name>
 		</developer>
 		<developer>
 			<name>
-			Renan Johanssen de Paula
+				Renan Johanssen de Paula
 			</name>
 		</developer>
 	</developers>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
