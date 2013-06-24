@@ -1,15 +1,17 @@
 package br.com.madeInJava.validate;
 
+import br.com.madeInJava.validate.validators.CPFValidator;
 import br.com.madeInJava.validate.validators.EmailValidator;
 import br.com.madeInJava.validate.validators.NotEmptyValidator;
 import br.com.madeInJava.validate.validators.NotNullValidator;
 import br.com.madeInJava.validate.validators.NumberValidator;
 
-public class Validator {
+public abstract class Validator {
 	
 	private static AbstractValidator<String> numberValidator;
 	private static AbstractValidator<String> notEmptyValidator;
 	private static AbstractValidator<String> emailValidator;
+	private static AbstractValidator<String> cpfValidator;
 	
 	public static AbstractValidator<String> getNumberValidator() {
 		if(numberValidator == null) {
@@ -45,4 +47,15 @@ public class Validator {
 		return emailValidator;
 	}
 	
+	public static AbstractValidator<String> getCPFValidator() {
+		if(cpfValidator == null) {
+			cpfValidator = new ValidatorBuilder<String>()
+				.withValidator(new NotNullValidator<String>())
+				.withValidator(new NotEmptyValidator())
+				.withValidator(new CPFValidator())
+				.build();
+		}
+		
+		return cpfValidator;
+	}
 }
