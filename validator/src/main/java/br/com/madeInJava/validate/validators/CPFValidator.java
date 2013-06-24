@@ -16,6 +16,7 @@ public class CPFValidator extends AbstractValidator<String> {
 
 	public CPFValidator() {
 		notValidSet = new ArrayList<String>();
+		notValidSet.add("00000000000");
 		notValidSet.add("11111111111");
 		notValidSet.add("22222222222");
 		notValidSet.add("33333333333");
@@ -25,7 +26,6 @@ public class CPFValidator extends AbstractValidator<String> {
 		notValidSet.add("77777777777");
 		notValidSet.add("88888888888");
 		notValidSet.add("99999999999");
-		notValidSet.add("00000000000");
 	}
 
 	private int calculateDigitValue(String base) {
