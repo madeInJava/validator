@@ -1,6 +1,6 @@
 package exemple;
 
-import br.com.madeInJava.validate.Validator;
+import br.com.madeInJava.validator.Validator;
 
 public class App {
 	public static void main(String[] args) {
