@@ -13,4 +13,5 @@ public class EmailException extends ValidateException {
 	public EmailException(String message) {
 		super(message);
 	}
+	
 }
