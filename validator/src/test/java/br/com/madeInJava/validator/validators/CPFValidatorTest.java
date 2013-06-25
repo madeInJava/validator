@@ -10,7 +10,7 @@ import br.com.madeInJava.validator.AbstractValidator;
 import br.com.madeInJava.validator.exceptions.cpf.CPFCharSetException;
 import br.com.madeInJava.validator.exceptions.cpf.InvalidCPFException;
 import br.com.madeInJava.validator.exceptions.cpf.LenghtException;
-import br.com.madeInJava.validator.validators.CPFValidator;
+import br.com.madeInJava.validator.exceptions.number.NumberFormatException;
 
 public class CPFValidatorTest {
 
@@ -52,6 +52,7 @@ public class CPFValidatorTest {
 		assertFalse(validator.isValid("54568459515"));
 		assertFalse(validator.isValid("351.354.895-15"));
 		assertFalse(validator.isValid("545.684.595-15"));
+		assertFalse(validator.isValid("5C5.6P4.5F5-15"));
 	}
 
 	@Test
@@ -84,5 +85,9 @@ public class CPFValidatorTest {
 	public void throwInvalidCPFException() {
 		validator.doValidation("351.354.895-15");
 	}
-
+	
+	@Test(expected = NumberFormatException.class)
+	public void throwNumberFormatException() {
+		validator.doValidation("3C1.3P4.8F5-15");
+	}
 }

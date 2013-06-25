@@ -13,6 +13,7 @@ public class CPFValidator extends AbstractValidator<String> {
 	private final int[] weight = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
 	private List<String> notValidSet;
+	private NumberValidator numberValidator;
 
 	public CPFValidator() {
 		notValidSet = new ArrayList<String>();
@@ -26,6 +27,7 @@ public class CPFValidator extends AbstractValidator<String> {
 		notValidSet.add("77777777777");
 		notValidSet.add("88888888888");
 		notValidSet.add("99999999999");
+		numberValidator = new NumberValidator();
 	}
 
 	private int calculateDigitValue(String base) {
@@ -48,6 +50,8 @@ public class CPFValidator extends AbstractValidator<String> {
 			cpf = cpf.replaceAll("[.-]", "");
 		}
 
+		this.numberValidator.doValidation(cpf);
+		
 		if (this.notValidSet.contains(cpf)) {
 			throw new CPFCharSetException();
 		}
