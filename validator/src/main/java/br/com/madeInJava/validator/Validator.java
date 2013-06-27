@@ -4,7 +4,7 @@ import br.com.madeInJava.validator.validators.CPFValidator;
 import br.com.madeInJava.validator.validators.EmailValidator;
 import br.com.madeInJava.validator.validators.NotEmptyValidator;
 import br.com.madeInJava.validator.validators.NotNullValidator;
-import br.com.madeInJava.validator.validators.NumberValidator;
+import br.com.madeInJava.validator.validators.PatternValidator;
 
 public abstract class Validator {
 	
@@ -18,7 +18,7 @@ public abstract class Validator {
 			numberValidator = new ValidatorBuilder<String>()
 				.withValidator(new NotNullValidator<String>())
 				.withValidator(new NotEmptyValidator())
-				.withValidator(new NumberValidator())
+				.withValidator(new PatternValidator())
 				.build();
 		}
 		return numberValidator;

@@ -7,13 +7,14 @@ import br.com.madeInJava.validator.AbstractValidator;
 import br.com.madeInJava.validator.exceptions.cpf.CPFCharSetException;
 import br.com.madeInJava.validator.exceptions.cpf.InvalidCPFException;
 import br.com.madeInJava.validator.exceptions.cpf.LenghtException;
+import br.com.madeInJava.validator.model.Patterns;
 
 public class CPFValidator extends AbstractValidator<String> {
 
 	private final int[] weight = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
 	private List<String> notValidSet;
-	private NumberValidator numberValidator;
+	private PatternValidator numberValidator;
 
 	public CPFValidator() {
 		notValidSet = new ArrayList<String>();
@@ -27,7 +28,7 @@ public class CPFValidator extends AbstractValidator<String> {
 		notValidSet.add("77777777777");
 		notValidSet.add("88888888888");
 		notValidSet.add("99999999999");
-		numberValidator = new NumberValidator();
+		numberValidator = new PatternValidator(Patterns.INTEGER.getPattern());
 	}
 
 	private int calculateDigitValue(String base) {

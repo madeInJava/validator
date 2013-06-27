@@ -14,7 +14,7 @@ public class NotEmptyValidatorTest {
 	private NotEmptyValidator validator;
 
 	@Before
-	private void init() {
+	public void init() {
 		this.validator = new NotEmptyValidator();
 	}
 
@@ -25,7 +25,7 @@ public class NotEmptyValidatorTest {
 
 	@Test
 	public void notEmptyValue() {
-		assertFalse(this.validator.isValid("Not Empty"));
+		assertTrue(this.validator.isValid("Not Empty"));
 	}
 
 	@Test(expected = EmptyValueException.class)
