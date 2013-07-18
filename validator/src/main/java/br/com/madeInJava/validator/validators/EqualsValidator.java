@@ -36,7 +36,7 @@ public class EqualsValidator<T> extends AbstractValidator<T> {
 	 * definido e o parametro em questão;
 	 * 
 	 * @param value
-	 *            Tipagem dinâmica;
+	 *            Tipagem dinâmica. Valor a ser validado;
 	 * 
 	 * @exception ModelNotFoundException
 	 *                Exceção lançada quando o modelo não é definido previamente
