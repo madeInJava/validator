@@ -7,7 +7,7 @@ public class NullValueException extends ValidateException {
 	private static final long serialVersionUID = 1L;
 
 	public NullValueException() {
-		super("Null value");
+		super("Null value.");
 	}
 
 }

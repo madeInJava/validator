@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import br.com.madeInJava.validator.AbstractValidator;
 import br.com.madeInJava.validator.exceptions.limit.AfterOfLimitException;
+import br.com.madeInJava.validator.exceptions.limit.LimitNotFoundException;
 
 public class BeforeValidatorTest {
 
@@ -36,6 +37,11 @@ public class BeforeValidatorTest {
 	@Test(expected = AfterOfLimitException.class)
 	public void throwAfterOfLimitException() {
 		validator.doValidation(11);
+	}
+
+	@Test(expected = LimitNotFoundException.class)
+	public void throwLimitNotFoundException() {
+		new BeforeValidator<Integer>().doValidation(1);
 	}
 
 }

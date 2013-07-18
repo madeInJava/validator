@@ -2,11 +2,12 @@ package br.com.madeInJava.validator.exceptions.general;
 
 import br.com.madeInJava.validator.exceptions.ValidateException;
 
-public class EmptyValueException extends ValidateException {
+public class NotEqualsException extends ValidateException {
 
 	private static final long serialVersionUID = 1L;
 
-	public EmptyValueException() {
-		super("Empty value.");
+	public NotEqualsException() {
+		super("Value not equals.");
 	}
+
 }

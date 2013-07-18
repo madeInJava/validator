@@ -37,4 +37,7 @@ public class IntervalValidatorTest {
 	public void throwInvalidIntervalException() {
 		validator.doValidation(new Interval<Integer>(null, null));
 	}
+	
+	
+	
 }
