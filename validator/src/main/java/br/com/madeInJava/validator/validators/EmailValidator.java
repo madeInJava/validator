@@ -1,17 +1,37 @@
 package br.com.madeInJava.validator.validators;
 
-import java.util.regex.Pattern;
-
 import br.com.madeInJava.validator.AbstractValidator;
 import br.com.madeInJava.validator.exceptions.email.EmailFormatException;
+import br.com.madeInJava.validator.model.Patterns;
 
+/**
+ * @author Renan JP
+ * @version 1.0.0
+ */
 public class EmailValidator extends AbstractValidator<String> {
 
-	private static final Pattern patten = Pattern.compile("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{1,3})+$");
+	private PatternValidator patternValidator;
 
+	public EmailValidator() {
+		this.patternValidator = new PatternValidator(Patterns.EMAIL.getPattern());
+	}
+
+	/**
+	 * Método responsável por validar se o parâmetro em questão é um E-Mail;
+	 * <p>
+	 * Este método utiliza o validador {@link PatternValidator};
+	 * </p>
+	 * 
+	 * @param value
+	 *            String. Valor a ser validado;
+	 * 
+	 * @exception EmailFormatException
+	 *                Exceção lançada quando o parâmetro não condiz com um
+	 *                E-Mail válido;
+	 */
 	@Override
 	protected void validate(String value) {
-		if (!patten.matcher(value).matches()) {
+		if (!this.patternValidator.isValid(value)) {
 			throw new EmailFormatException();
 		}
 	}

@@ -7,8 +7,13 @@ import br.com.madeInJava.validator.AbstractValidator;
 import br.com.madeInJava.validator.exceptions.cpf.CPFCharSetException;
 import br.com.madeInJava.validator.exceptions.cpf.InvalidCPFException;
 import br.com.madeInJava.validator.exceptions.cpf.LenghtException;
+import br.com.madeInJava.validator.exceptions.pattern.FormatException;
 import br.com.madeInJava.validator.model.Patterns;
 
+/**
+ * @author Renan JP
+ * @version 1.0.0
+ */
 public class CPFValidator extends AbstractValidator<String> {
 
 	private final int[] weight = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -41,6 +46,31 @@ public class CPFValidator extends AbstractValidator<String> {
 		return sum > 9 ? 0 : sum;
 	}
 
+	/**
+	 * Método responsável por validar se o parâmetro em questão é um CPF;
+	 * <p>
+	 * Este método utiliza o validador {@link PatternValidator};
+	 * </p>
+	 * 
+	 * @param value
+	 *            String. Valor a ser validado;
+	 * 
+	 * @exception LenghtException
+	 *                Exceção lançada quando o parâmetro não possui o tamanho
+	 *                adequado, 11 ou 14 caracteres;
+	 * 
+	 * @exception FormatException
+	 *                Exceção lançada quando o parâmetro é composto por letras
+	 *                ou caracteres que não condizem com um CPF;
+	 * 
+	 * @exception CPFCharSetException
+	 *                Exceção lançada quando o parâmetro é composto por números
+	 *                sequenciais;
+	 * 
+	 * @exception InvalidCPFException
+	 *                Exceção lançada quando o parâmetro não condiz com um CPF
+	 *                válido;
+	 */
 	@Override
 	protected void validate(String cpf) {
 		if (cpf.length() != 11 && cpf.length() != 14) {
@@ -52,7 +82,7 @@ public class CPFValidator extends AbstractValidator<String> {
 		}
 
 		this.numberValidator.doValidation(cpf);
-		
+
 		if (this.notValidSet.contains(cpf)) {
 			throw new CPFCharSetException();
 		}

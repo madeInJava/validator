@@ -8,7 +8,7 @@ import br.com.madeInJava.validator.exceptions.general.NotEqualsException;
  * @author Renan JP
  * @version 1.0.0
  * @param <T>
- *            Tipagem dinamica
+ *            Tipagem dinâmica
  */
 public class EqualsValidator<T> extends AbstractValidator<T> {
 
