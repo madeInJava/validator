@@ -4,6 +4,12 @@ import br.com.madeInJava.validator.AbstractValidator;
 import br.com.madeInJava.validator.exceptions.general.ModelNotFoundException;
 import br.com.madeInJava.validator.exceptions.general.NotEqualsException;
 
+/**
+ * @author Renan JP
+ * @version 1.0.0
+ * @param <T>
+ *            Tipagem dinamica
+ */
 public class EqualsValidator<T> extends AbstractValidator<T> {
 
 	private T model;
@@ -25,6 +31,22 @@ public class EqualsValidator<T> extends AbstractValidator<T> {
 		this.model = model;
 	}
 
+	/**
+	 * Método responsável por validar a igualdade entre o modelo previamente
+	 * definido e o parametro em questão;
+	 * 
+	 * @param value
+	 *            Tipagem dinâmica;
+	 * 
+	 * @exception ModelNotFoundException
+	 *                Exceção lançada quando o modelo não é definido previamente
+	 *                a invocação deste método. Para definir o modelo utilize os
+	 *                métodos de acesso (getModel e setModel) ou o construtor
+	 *                parametrizado;
+	 * @exception NotEqualsException
+	 *                Exceção lançada quando o parâmetro não é igual ao modelo
+	 *                previamente definido;
+	 */
 	@Override
 	protected void validate(T value) {
 		if (model == null) {
