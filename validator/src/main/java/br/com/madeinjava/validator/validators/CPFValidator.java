@@ -7,7 +7,6 @@ import br.com.madeinjava.validator.AbstractValidator;
 import br.com.madeinjava.validator.exceptions.cpf.CPFCharSetException;
 import br.com.madeinjava.validator.exceptions.cpf.InvalidCPFException;
 import br.com.madeinjava.validator.exceptions.cpf.LenghtException;
-import br.com.madeinjava.validator.exceptions.pattern.FormatException;
 import br.com.madeinjava.validator.model.Patterns;
 
 /**

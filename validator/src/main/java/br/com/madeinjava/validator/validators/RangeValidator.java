@@ -2,7 +2,6 @@ package br.com.madeinjava.validator.validators;
 
 import br.com.madeinjava.validator.AbstractValidator;
 import br.com.madeinjava.validator.exceptions.interval.IntervalNotFoundException;
-import br.com.madeinjava.validator.exceptions.interval.InvalidIntervalException;
 import br.com.madeinjava.validator.exceptions.range.OutsideOfRangeException;
 import br.com.madeinjava.validator.model.Interval;
 
