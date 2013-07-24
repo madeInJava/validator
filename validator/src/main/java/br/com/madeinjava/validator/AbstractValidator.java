@@ -27,10 +27,14 @@ public abstract class AbstractValidator<T> {
 	 * @param validator
 	 *            Tipagem dinâmica;
 	 */
-	public void nextValidator(AbstractValidator<T> validator) {
+	public void setNextValidator(AbstractValidator<T> validator) {
 		this.nexValidator = validator;
 	}
 
+	public AbstractValidator<T> getNExtValidator() {
+		return this.nexValidator;
+	}
+	
 	/**
 	 * Método responsável por propagar a validação dentre a cadeia de
 	 * validadores;

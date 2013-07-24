@@ -10,7 +10,7 @@ public class ValidatorBuilder<T> {
 		if (this.firstValidator == null) {
 			this.firstValidator = validator;
 		} else {
-			this.lastValidator.nextValidator(validator);
+			this.lastValidator.setNextValidator(validator);
 		}
 		this.lastValidator = validator;
 		return this;
