@@ -13,8 +13,8 @@ import br.com.madeInJava.validator.model.Locale;
 public class MonetaryValidator extends AbstractValidator<String> {
 
 	private Locale locale;
-	private static String MONETARY_US = "\\d{1,3}(,\\d{3})*(\\.\\d{2})?";
-	private static String MONETARY_BR = "\\d{1,3}(\\.\\d{3})*(,\\d{2})?";
+	private static final String MONETARY_US = "\\d{1,3}(,\\d{3})*(\\.\\d{2})?";
+	private static final String MONETARY_BR = "\\d{1,3}(\\.\\d{3})*(,\\d{2})?";
 
 	public MonetaryValidator() {
 		super();

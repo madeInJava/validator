@@ -44,8 +44,9 @@ public abstract class AbstractValidator<T> {
 	public void doValidation(T value) {
 		this.validate(value);
 
-		if (this.nexValidator != null)
+		if (this.nexValidator != null) {
 			this.nexValidator.doValidation(value);
+		}
 	}
 
 	/**
