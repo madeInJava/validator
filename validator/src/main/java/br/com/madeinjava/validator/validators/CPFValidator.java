@@ -16,10 +16,10 @@ import br.com.madeinjava.validator.model.Patterns;
  */
 public class CPFValidator extends AbstractValidator<String> {
 
-	private final int[] weight = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-	private final int cpfLength = 11;
-	private final int cpfWithMaskLength = 14;
-	private final int cpfWithoutCheckedNumberLenght = 9;
+	private static final int[] WEIGHT = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+	private static final int CPF_LENGTH = 11;
+	private static final int CPF_WITH_MASK_LENGTH = 14;
+	private static final int CPF_WITHOUT_CHECKED_NUMBER_LENGTH = 9;
 	
 	private List<String> notValidSet;
 	private PatternValidator numberValidator;
@@ -43,20 +43,20 @@ public class CPFValidator extends AbstractValidator<String> {
 		int sum = 0;
 		for (int i = base.length() - 1, digit; i >= 0; i--) {
 			digit = Integer.parseInt(base.substring(i, i + 1));
-			sum += digit * this.weight[this.weight.length - base.length() + i];
+			sum += digit * WEIGHT[WEIGHT.length - base.length() + i];
 		}
-		sum = 11 - sum % 11;
-		return sum > 9 ? 0 : sum;
+		sum = CPF_LENGTH - sum % CPF_LENGTH;
+		return sum > CPF_WITHOUT_CHECKED_NUMBER_LENGTH ? 0 : sum;
 	}
 	
 	private void validateLength(String cpf) {
-		if (cpf.length() != this.cpfLength && cpf.length() != this.cpfWithMaskLength) {
+		if (cpf.length() != CPF_LENGTH && cpf.length() != CPF_WITH_MASK_LENGTH) {
 			throw new LenghtException();
 		}
 	}
 	
 	private boolean containMask(String cpf) {
-		return cpf.length() == this.cpfWithMaskLength;
+		return cpf.length() == CPF_WITH_MASK_LENGTH;
 	}
 	
 	private String removeMask(String cpf) {
@@ -100,11 +100,11 @@ public class CPFValidator extends AbstractValidator<String> {
 			throw new CPFCharSetException();
 		}
 
-		String cpfWithoutCheckedNumber = cpfNumber.substring(0, this.cpfWithoutCheckedNumberLenght);
-		int CheckedDigit1 = calculateDigitValue(cpfWithoutCheckedNumber);
-		int CheckedDigit2 = calculateDigitValue(cpfWithoutCheckedNumber + CheckedDigit1);
+		String cpfWithoutCheckedNumber = cpfNumber.substring(0, CPF_WITHOUT_CHECKED_NUMBER_LENGTH);
+		int checkedDigit1 = calculateDigitValue(cpfWithoutCheckedNumber);
+		int checkedDigit2 = calculateDigitValue(cpfWithoutCheckedNumber + checkedDigit1);
 
-		if (!cpfNumber.equals(cpfWithoutCheckedNumber + CheckedDigit1 + CheckedDigit2)) {
+		if (!cpfNumber.equals(cpfWithoutCheckedNumber + checkedDigit1 + checkedDigit2)) {
 			throw new InvalidCPFException();
 		}
 	}
