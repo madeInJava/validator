@@ -20,7 +20,7 @@ public class NotEmptyValidator extends AbstractValidator<String> {
 	 */
 	@Override
 	public void validate(String value) {
-		if (value.toString().trim().isEmpty()) {
+		if (value.trim().isEmpty()) {
 			throw new EmptyValueException();
 		}
 	}
