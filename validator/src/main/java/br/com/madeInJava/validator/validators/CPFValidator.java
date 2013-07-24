@@ -17,7 +17,10 @@ import br.com.madeInJava.validator.model.Patterns;
 public class CPFValidator extends AbstractValidator<String> {
 
 	private final int[] weight = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-
+	private final int cpfLength = 11;
+	private final int cpfWithMaskLength = 14;
+	private final int cpfWithoutCheckedNumberLenght = 9;
+	
 	private List<String> notValidSet;
 	private PatternValidator numberValidator;
 
@@ -44,6 +47,20 @@ public class CPFValidator extends AbstractValidator<String> {
 		}
 		sum = 11 - sum % 11;
 		return sum > 9 ? 0 : sum;
+	}
+	
+	private void validateLength(String cpf) {
+		if (cpf.length() != this.cpfLength && cpf.length() != this.cpfWithMaskLength) {
+			throw new LenghtException();
+		}
+	}
+	
+	private boolean containMask(String cpf) {
+		return cpf.length() == this.cpfWithMaskLength;
+	}
+	
+	private String removeMask(String cpf) {
+		return cpf.replaceAll("[.-]", "");
 	}
 
 	/**
@@ -73,25 +90,23 @@ public class CPFValidator extends AbstractValidator<String> {
 	 */
 	@Override
 	protected void validate(String cpf) {
-		if (cpf.length() != 11 && cpf.length() != 14) {
-			throw new LenghtException();
-		}
+		this.validateLength(cpf);
+		
+		String cpfNumber = this.containMask(cpf) ? this.removeMask(cpf) : cpf;
 
-		if (cpf.length() == 14) {
-			cpf = cpf.replaceAll("[.-]", "");
-		}
+		this.numberValidator.doValidation(cpfNumber);
 
-		this.numberValidator.doValidation(cpf);
-
-		if (this.notValidSet.contains(cpf)) {
+		if (this.notValidSet.contains(cpfNumber)) {
 			throw new CPFCharSetException();
 		}
 
-		Integer digit1 = calculateDigitValue(cpf.substring(0, 9));
-		Integer digit2 = calculateDigitValue(cpf.substring(0, 9) + digit1);
+		String cpfWithoutCheckedNumber = cpfNumber.substring(0, this.cpfWithoutCheckedNumberLenght);
+		int CheckedDigit1 = calculateDigitValue(cpfWithoutCheckedNumber);
+		int CheckedDigit2 = calculateDigitValue(cpfWithoutCheckedNumber + CheckedDigit1);
 
-		if (!cpf.equals(cpf.substring(0, 9) + digit1.toString() + digit2.toString())) {
+		if (!cpfNumber.equals(cpfWithoutCheckedNumber + CheckedDigit1 + CheckedDigit2)) {
 			throw new InvalidCPFException();
 		}
 	}
+
 }
