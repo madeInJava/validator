@@ -46,8 +46,8 @@ public class RangeValidator<T extends Comparable<T>> extends AbstractValidator<T
 	 *            Tipagem dinâmica. Valor a ser validado;
 	 * 
 	 * @exception InvalidArgumentException
-	 * 				Exceção lancada quando o parâmetro é inválido.
-	 * 				Exemplo: Valor nulo;
+	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
+	 *                Valor nulo;
 	 * @exception IntervalNotFoundException
 	 *                Exceção lançada quando o intervalo não é definido
 	 *                previamente a invocação deste método. Para definir o

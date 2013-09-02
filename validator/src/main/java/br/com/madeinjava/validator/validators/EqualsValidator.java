@@ -40,8 +40,8 @@ public class EqualsValidator<T> extends AbstractValidator<T> {
 	 *            Tipagem dinâmica. Valor a ser validado;
 	 * 
 	 * @exception InvalidArgumentException
-	 * 				Exceção lancada quando o parâmetro é inválido.
-	 * 				Exemplo: Valor nulo; 
+	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
+	 *                Valor nulo;
 	 * @exception ModelNotFoundException
 	 *                Exceção lançada quando o modelo não é definido previamente
 	 *                a invocação deste método. Para definir o modelo utilize os

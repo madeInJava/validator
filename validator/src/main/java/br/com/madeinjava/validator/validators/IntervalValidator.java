@@ -20,8 +20,8 @@ public class IntervalValidator<T extends Comparable<T>> extends AbstractValidato
 	 *            Intervalo com tipagem dinâmica. Valor a ser validado;
 	 * 
 	 * @exception InvalidArgumentException
-	 * 				Exceção lancada quando o parâmetro é inválido.
-	 * 				Exemplo: Valor nulo; 
+	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
+	 *                Valor nulo;
 	 * @exception InvalidIntervalException
 	 *                Exceção lançada quando o interválo não é válido;
 	 */

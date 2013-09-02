@@ -41,8 +41,8 @@ public class PatternValidator extends AbstractValidator<String> {
 	 *            String. Valor a ser validado;
 	 * 
 	 * @exception InvalidArgumentException
-	 * 				Exceção lancada quando o parâmetro é inválido.
-	 * 				Exemplo: Valor nulo; 
+	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
+	 *                Valor nulo;
 	 * @exception PatternNotFound
 	 *                Exceção lançada quando o pattern não é definido
 	 *                previamente a invocação deste método. Para definir o

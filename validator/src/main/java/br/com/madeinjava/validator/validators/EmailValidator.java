@@ -27,8 +27,8 @@ public class EmailValidator extends AbstractValidator<String> {
 	 *            String. Valor a ser validado;
 	 * 
 	 * @exception InvalidArgumentException
-	 * 				Exceção lancada quando o parâmetro é inválido.
-	 * 				Exemplo: Valor nulo;
+	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
+	 *                Valor nulo;
 	 * @exception EmailFormatException
 	 *                Exceção lançada quando o parâmetro não condiz com um
 	 *                E-Mail válido;

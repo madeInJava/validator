@@ -17,8 +17,8 @@ public class NotEmptyValidator extends AbstractValidator<String> {
 	 *            String. Valor a ser validado;
 	 * 
 	 * @exception InvalidArgumentException
-	 * 				Exceção lancada quando o parâmetro é inválido.
-	 * 				Exemplo: Valor nulo;
+	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
+	 *                Valor nulo;
 	 * @exception EmptyValueException
 	 *                Exceção lançada quando o parâmetro está vazio;
 	 */

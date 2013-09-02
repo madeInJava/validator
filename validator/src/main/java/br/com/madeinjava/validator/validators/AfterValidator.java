@@ -40,8 +40,8 @@ public class AfterValidator<T extends Comparable<T>> extends AbstractValidator<T
 	 *            Tipagem dinâmica. Valor a ser validado;
 	 * 
 	 * @exception InvalidArgumentException
-	 * 				Exceção lancada quando o parâmetro é inválido.
-	 * 				Exemplo: Valor nulo; 
+	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
+	 *                Valor nulo;
 	 * @exception LimitNotFoundException
 	 *                Exceção lançada quando o limite não é definido previamente
 	 *                a invocação deste método. Para definir o limite utilize os

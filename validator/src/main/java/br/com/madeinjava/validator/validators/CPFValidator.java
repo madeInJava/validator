@@ -73,8 +73,8 @@ public class CPFValidator extends AbstractValidator<String> {
 	 *            String. Valor a ser validado;
 	 * 
 	 * @exception InvalidArgumentException
-	 * 				Exceção lancada quando o parâmetro é inválido.
-	 * 				Exemplo: Valor nulo;
+	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
+	 *                Valor nulo;
 	 * @exception LenghtException
 	 *                Exceção lançada quando o parâmetro não possui o tamanho
 	 *                adequado, 11 ou 14 caracteres;
