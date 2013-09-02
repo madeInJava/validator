@@ -1,6 +1,7 @@
 package br.com.madeinjava.validator.validators;
 
 import br.com.madeinjava.validator.AbstractValidator;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.general.ModelNotFoundException;
 import br.com.madeinjava.validator.exceptions.general.NotEqualsException;
 
@@ -38,6 +39,9 @@ public class EqualsValidator<T> extends AbstractValidator<T> {
 	 * @param value
 	 *            Tipagem dinâmica. Valor a ser validado;
 	 * 
+	 * @exception InvalidArgumentException
+	 * 				Exceção lancada quando o parâmetro é inválido.
+	 * 				Exemplo: Valor nulo; 
 	 * @exception ModelNotFoundException
 	 *                Exceção lançada quando o modelo não é definido previamente
 	 *                a invocação deste método. Para definir o modelo utilize os
@@ -49,11 +53,11 @@ public class EqualsValidator<T> extends AbstractValidator<T> {
 	 */
 	@Override
 	protected void validate(T value) {
-		if (model == null) {
+		if (value == null) {
+			throw new InvalidArgumentException();
+		} else if (model == null) {
 			throw new ModelNotFoundException();
-		}
-
-		if (!model.equals(value)) {
+		} else if (!model.equals(value)) {
 			throw new NotEqualsException();
 		}
 	}

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.madeinjava.validator.AbstractValidator;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.limit.BeforeOfLimitException;
 import br.com.madeinjava.validator.exceptions.limit.LimitNotFoundException;
 
@@ -21,22 +22,27 @@ public class AfterValidatorTest {
 
 	@Test
 	public void afterValue() {
-		assertTrue(validator.isValid(11));
+		assertTrue(this.validator.isValid(11));
 	}
 
 	@Test
 	public void beforeValue() {
-		assertFalse(validator.isValid(9));
+		assertFalse(this.validator.isValid(9));
 	}
 
 	@Test
 	public void equalsValue() {
-		assertFalse(validator.isValid(10));
+		assertFalse(this.validator.isValid(10));
 	}
 
+	@Test(expected = InvalidArgumentException.class)
+	public void throwInvalidArgumentException() {
+		this.validator.doValidation(null);
+	}
+	
 	@Test(expected = BeforeOfLimitException.class)
 	public void throwBeforeOfLimitException() {
-		validator.doValidation(9);
+		this.validator.doValidation(9);
 	}
 
 	@Test(expected = LimitNotFoundException.class)

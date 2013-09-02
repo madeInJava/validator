@@ -2,6 +2,7 @@ package br.com.madeinjava.validator.validators;
 
 import br.com.madeinjava.validator.AbstractValidator;
 import br.com.madeinjava.validator.exceptions.email.EmailFormatException;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.model.Patterns;
 
 /**
@@ -25,13 +26,18 @@ public class EmailValidator extends AbstractValidator<String> {
 	 * @param value
 	 *            String. Valor a ser validado;
 	 * 
+	 * @exception InvalidArgumentException
+	 * 				Exceção lancada quando o parâmetro é inválido.
+	 * 				Exemplo: Valor nulo;
 	 * @exception EmailFormatException
 	 *                Exceção lançada quando o parâmetro não condiz com um
 	 *                E-Mail válido;
 	 */
 	@Override
 	protected void validate(String value) {
-		if (!this.patternValidator.isValid(value)) {
+		if (value == null) {
+			throw new InvalidArgumentException();
+		} else if (!this.patternValidator.isValid(value)) {
 			throw new EmailFormatException();
 		}
 	}

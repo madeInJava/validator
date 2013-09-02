@@ -1,6 +1,7 @@
 package br.com.madeinjava.validator.validators;
 
 import br.com.madeinjava.validator.AbstractValidator;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.general.LocaleNotFoundException;
 import br.com.madeinjava.validator.exceptions.monetary.MonetaryFormatException;
 import br.com.madeinjava.validator.model.Locale;
@@ -59,22 +60,24 @@ public class MonetaryValidator extends AbstractValidator<String> {
 	 * @param value
 	 *            String. Valor a ser validado;
 	 * 
+	 * @exception InvalidArgumentException
+	 * 				Exceção lancada quando o parâmetro é inválido.
+	 * 				Exemplo: Valor nulo; 
 	 * @exception LocaleNotFoundException
 	 *                Exceção lançada quando o locale não é definido previamente
 	 *                a invocação deste método. Para definir o locale utilize os
 	 *                métodos de acesso (getLocale e setLocale) ou o construtor
 	 *                parametrizado;
-	 * 
 	 * @exception MonetaryFormatException
 	 *                Exceção lançada quando o valor não é válido;
 	 */
 	@Override
 	protected void validate(String value) {
-		if (this.locale == null) {
+		if (value == null) {
+			throw new InvalidArgumentException();
+		} else if (this.locale == null) {
 			throw new LocaleNotFoundException();
-		}
-
-		if (value.startsWith("[.,]") || !contaisFloatingPoint(value) || !value.matches(this.getRegex())) {
+		} else if (value.startsWith("[.,]") || !contaisFloatingPoint(value) || !value.matches(this.getRegex())) {
 			throw new MonetaryFormatException();
 		}
 	}

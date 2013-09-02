@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.madeinjava.validator.AbstractValidator;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.interval.IntervalNotFoundException;
 import br.com.madeinjava.validator.exceptions.interval.InvalidIntervalException;
 import br.com.madeinjava.validator.exceptions.range.OutsideOfRangeException;
@@ -33,23 +34,28 @@ public class RangeValidatorTest {
 
 	@Test
 	public void beforeInterval() throws ParseException {
-		assertFalse(integerValidator.isValid(0));
-		assertFalse(stringValidator.isValid("b"));
-		assertFalse(dateValidator.isValid(sdf.parse("04/06/2013")));
+		assertFalse(this.integerValidator.isValid(0));
+		assertFalse(this.stringValidator.isValid("b"));
+		assertFalse(this.dateValidator.isValid(sdf.parse("04/06/2013")));
 	}
 
 	@Test
 	public void afterInterval() throws ParseException {
-		assertFalse(integerValidator.isValid(6));
-		assertFalse(stringValidator.isValid("g"));
-		assertFalse(dateValidator.isValid(sdf.parse("11/06/2013")));
+		assertFalse(this.integerValidator.isValid(6));
+		assertFalse(this.stringValidator.isValid("g"));
+		assertFalse(this.dateValidator.isValid(sdf.parse("11/06/2013")));
 	}
 
 	@Test
 	public void inInterval() throws ParseException {
-		assertTrue(integerValidator.isValid(4));
-		assertTrue(stringValidator.isValid("d"));
-		assertTrue(dateValidator.isValid(sdf.parse("9/06/2013")));
+		assertTrue(this.integerValidator.isValid(4));
+		assertTrue(this.stringValidator.isValid("d"));
+		assertTrue(this.dateValidator.isValid(sdf.parse("9/06/2013")));
+	}
+	
+	@Test(expected = InvalidArgumentException.class)
+	public void throwInvalidArgumentException() {
+		this.dateValidator.doValidation(null);
 	}
 
 	@Test(expected = IntervalNotFoundException.class)
@@ -64,6 +70,6 @@ public class RangeValidatorTest {
 	
 	@Test(expected = OutsideOfRangeException.class)
 	public void throwOutsideOfRangeException() {
-		integerValidator.doValidation(0);
+		this.integerValidator.doValidation(0);
 	}
 }

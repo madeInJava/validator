@@ -3,6 +3,7 @@ package br.com.madeinjava.validator.validators;
 import java.util.regex.Pattern;
 
 import br.com.madeinjava.validator.AbstractValidator;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.pattern.FormatException;
 import br.com.madeinjava.validator.exceptions.pattern.PatternNotFound;
 
@@ -39,6 +40,9 @@ public class PatternValidator extends AbstractValidator<String> {
 	 * @param value
 	 *            String. Valor a ser validado;
 	 * 
+	 * @exception InvalidArgumentException
+	 * 				Exceção lancada quando o parâmetro é inválido.
+	 * 				Exemplo: Valor nulo; 
 	 * @exception PatternNotFound
 	 *                Exceção lançada quando o pattern não é definido
 	 *                previamente a invocação deste método. Para definir o
@@ -50,11 +54,11 @@ public class PatternValidator extends AbstractValidator<String> {
 	 */
 	@Override
 	public void validate(String value) {
-		if (this.pattern == null) {
+		if (value == null) {
+			throw new InvalidArgumentException();
+		} else if (this.pattern == null) {
 			throw new PatternNotFound();
-		}
-
-		if (!this.pattern.matcher(value).matches()) {
+		} else if (!this.pattern.matcher(value).matches()) {
 			throw new FormatException();
 		}
 	}

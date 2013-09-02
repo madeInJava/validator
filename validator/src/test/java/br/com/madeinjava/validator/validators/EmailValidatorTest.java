@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import br.com.madeinjava.validator.AbstractValidator;
 import br.com.madeinjava.validator.exceptions.email.EmailFormatException;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 
 public class EmailValidatorTest {
 
@@ -31,6 +32,11 @@ public class EmailValidatorTest {
 		assertFalse(this.validator.isValid("@email.com"));
 		assertFalse(this.validator.isValid("myEmail.com"));
 		assertFalse(this.validator.isValid("my@email"));
+	}
+	
+	@Test(expected = InvalidArgumentException.class)
+	public void throwInvalidArgumentException() {
+		this.validator.doValidation(null);
 	}
 
 	@Test(expected = EmailFormatException.class)

@@ -1,6 +1,7 @@
 package br.com.madeinjava.validator.validators;
 
 import br.com.madeinjava.validator.AbstractValidator;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.interval.IntervalNotFoundException;
 import br.com.madeinjava.validator.exceptions.range.OutsideOfRangeException;
 import br.com.madeinjava.validator.model.Interval;
@@ -44,6 +45,9 @@ public class RangeValidator<T extends Comparable<T>> extends AbstractValidator<T
 	 * @param value
 	 *            Tipagem dinâmica. Valor a ser validado;
 	 * 
+	 * @exception InvalidArgumentException
+	 * 				Exceção lancada quando o parâmetro é inválido.
+	 * 				Exemplo: Valor nulo;
 	 * @exception IntervalNotFoundException
 	 *                Exceção lançada quando o intervalo não é definido
 	 *                previamente a invocação deste método. Para definir o
@@ -57,16 +61,17 @@ public class RangeValidator<T extends Comparable<T>> extends AbstractValidator<T
 	 */
 	@Override
 	protected void validate(T value) {
-		if (this.interval == null) {
+		if (value == null) {
+			throw new InvalidArgumentException();
+		} else if (this.interval == null) {
 			throw new IntervalNotFoundException();
-		}
-
-		this.intervalValidator.doValidation(this.interval);
-
-		T initialValue = this.interval.getInitialValue();
-		T finalValue = this.interval.getFinalValue();
-		if (initialValue.compareTo(value) > 0 || finalValue.compareTo(value) < 0) {
-			throw new OutsideOfRangeException();
+		} else {
+			this.intervalValidator.doValidation(this.interval);
+			T initialValue = this.interval.getInitialValue();
+			T finalValue = this.interval.getFinalValue();
+			if (initialValue.compareTo(value) > 0 || finalValue.compareTo(value) < 0) {
+				throw new OutsideOfRangeException();
+			}
 		}
 	}
 

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.madeinjava.validator.AbstractValidator;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.pattern.FormatException;
 import br.com.madeinjava.validator.exceptions.pattern.PatternNotFound;
 import br.com.madeinjava.validator.model.Patterns;
@@ -42,6 +43,11 @@ public class PatternValidatorTest {
 	public void notThrowFormatException() {
 		this.validator.doValidation("0123456789");
 		assertTrue(true);
+	}
+	
+	@Test(expected = InvalidArgumentException.class)
+	public void throwInvalidArgumentException() {
+		this.validator.doValidation(null);
 	}
 
 	@Test(expected = PatternNotFound.class)

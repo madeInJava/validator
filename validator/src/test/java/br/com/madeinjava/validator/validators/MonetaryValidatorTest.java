@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.madeinjava.validator.AbstractValidator;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.general.LocaleNotFoundException;
 import br.com.madeinjava.validator.exceptions.monetary.MonetaryFormatException;
 import br.com.madeinjava.validator.model.Locale;
@@ -24,31 +25,36 @@ public class MonetaryValidatorTest {
 
 	@Test
 	public void monetaryValue() {
-		assertTrue(brMonetaryValidator.isValid("9.999.999,99"));
-		assertTrue(usMonetaryValidator.isValid("9,999,999.99"));
+		assertTrue(this.brMonetaryValidator.isValid("9.999.999,99"));
+		assertTrue(this.usMonetaryValidator.isValid("9,999,999.99"));
 	}
 
 	@Test
 	public void notMonetayValue() {
-		assertFalse(brMonetaryValidator.isValid(""));
-		assertFalse(brMonetaryValidator.isValid("99"));
-		assertFalse(brMonetaryValidator.isValid(".99"));
-		assertFalse(brMonetaryValidator.isValid(",99"));
-		assertFalse(brMonetaryValidator.isValid("999999999"));
-		assertFalse(brMonetaryValidator.isValid("999.999,999"));
-		assertFalse(brMonetaryValidator.isValid("9,999,999,99"));
-		assertFalse(brMonetaryValidator.isValid("9.999.999.99"));
-		assertFalse(brMonetaryValidator.isValid("adsad"));
+		assertFalse(this.brMonetaryValidator.isValid(""));
+		assertFalse(this.brMonetaryValidator.isValid("99"));
+		assertFalse(this.brMonetaryValidator.isValid(".99"));
+		assertFalse(this.brMonetaryValidator.isValid(",99"));
+		assertFalse(this.brMonetaryValidator.isValid("999999999"));
+		assertFalse(this.brMonetaryValidator.isValid("999.999,999"));
+		assertFalse(this.brMonetaryValidator.isValid("9,999,999,99"));
+		assertFalse(this.brMonetaryValidator.isValid("9.999.999.99"));
+		assertFalse(this.brMonetaryValidator.isValid("adsad"));
 
-		assertFalse(usMonetaryValidator.isValid(""));
-		assertFalse(usMonetaryValidator.isValid("99"));
-		assertFalse(usMonetaryValidator.isValid(".99"));
-		assertFalse(usMonetaryValidator.isValid(",99"));
-		assertFalse(usMonetaryValidator.isValid("999999999"));
-		assertFalse(brMonetaryValidator.isValid("999,999.999"));
-		assertFalse(usMonetaryValidator.isValid("9,999,999,99"));
-		assertFalse(usMonetaryValidator.isValid("9.999.999.99"));
-		assertFalse(usMonetaryValidator.isValid("adsad"));
+		assertFalse(this.usMonetaryValidator.isValid(""));
+		assertFalse(this.usMonetaryValidator.isValid("99"));
+		assertFalse(this.usMonetaryValidator.isValid(".99"));
+		assertFalse(this.usMonetaryValidator.isValid(",99"));
+		assertFalse(this.usMonetaryValidator.isValid("999999999"));
+		assertFalse(this.brMonetaryValidator.isValid("999,999.999"));
+		assertFalse(this.usMonetaryValidator.isValid("9,999,999,99"));
+		assertFalse(this.usMonetaryValidator.isValid("9.999.999.99"));
+		assertFalse(this.usMonetaryValidator.isValid("adsad"));
+	}
+	
+	@Test(expected = InvalidArgumentException.class)
+	public void throwInvalidArgumentException() {
+		this.usMonetaryValidator.doValidation(null);
 	}
 
 	@Test(expected = LocaleNotFoundException.class)

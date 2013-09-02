@@ -1,6 +1,7 @@
 package br.com.madeinjava.validator.validators;
 
 import br.com.madeinjava.validator.AbstractValidator;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.limit.BeforeOfLimitException;
 import br.com.madeinjava.validator.exceptions.limit.LimitNotFoundException;
 
@@ -38,6 +39,9 @@ public class AfterValidator<T extends Comparable<T>> extends AbstractValidator<T
 	 * @param value
 	 *            Tipagem dinâmica. Valor a ser validado;
 	 * 
+	 * @exception InvalidArgumentException
+	 * 				Exceção lancada quando o parâmetro é inválido.
+	 * 				Exemplo: Valor nulo; 
 	 * @exception LimitNotFoundException
 	 *                Exceção lançada quando o limite não é definido previamente
 	 *                a invocação deste método. Para definir o limite utilize os
@@ -49,11 +53,11 @@ public class AfterValidator<T extends Comparable<T>> extends AbstractValidator<T
 	 */
 	@Override
 	protected void validate(T value) {
-		if (this.limit == null) {
+		if (value == null) {
+			throw new InvalidArgumentException();
+		} else if (this.limit == null) {
 			throw new LimitNotFoundException();
-		}
-
-		if (value.compareTo(this.limit) < 1) {
+		} else if (value.compareTo(this.limit) < 1) {
 			throw new BeforeOfLimitException();
 		}
 	}

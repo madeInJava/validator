@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.madeinjava.validator.AbstractValidator;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.general.ModelNotFoundException;
 import br.com.madeinjava.validator.exceptions.general.NotEqualsException;
 
@@ -21,12 +22,17 @@ public class EqualsValidatorTest {
 
 	@Test
 	public void equalsValue() {
-		assertTrue(validator.isValid("Object"));
+		assertTrue(this.validator.isValid("Object"));
 	}
 
 	@Test
 	public void notEqualsValue() {
-		assertFalse(validator.isValid("I'am not equals :("));
+		assertFalse(this.validator.isValid("I'am not equals :("));
+	}
+	
+	@Test(expected = InvalidArgumentException.class)
+	public void throwInvalidArgumentException() {
+		this.validator.doValidation(null);
 	}
 
 	@Test(expected = ModelNotFoundException.class)
@@ -36,7 +42,7 @@ public class EqualsValidatorTest {
 
 	@Test(expected = NotEqualsException.class)
 	public void throwNotEqualsException() {
-		validator.doValidation("I'am not equals :(");
+		this.validator.doValidation("I'am not equals :(");
 	}
 
 }

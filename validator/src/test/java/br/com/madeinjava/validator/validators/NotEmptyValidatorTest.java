@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.madeinjava.validator.exceptions.general.EmptyValueException;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 
 public class NotEmptyValidatorTest {
 
@@ -25,6 +26,11 @@ public class NotEmptyValidatorTest {
 	@Test
 	public void notEmptyValue() {
 		assertTrue(this.validator.isValid("Not Empty"));
+	}
+	
+	@Test(expected = InvalidArgumentException.class)
+	public void throwInvalidArgumentException() {
+		this.validator.doValidation(null);
 	}
 
 	@Test(expected = EmptyValueException.class)

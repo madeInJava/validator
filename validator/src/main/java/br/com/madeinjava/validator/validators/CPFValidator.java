@@ -7,6 +7,7 @@ import br.com.madeinjava.validator.AbstractValidator;
 import br.com.madeinjava.validator.exceptions.cpf.CPFCharSetException;
 import br.com.madeinjava.validator.exceptions.cpf.InvalidCPFException;
 import br.com.madeinjava.validator.exceptions.cpf.LenghtException;
+import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.model.Patterns;
 
 /**
@@ -19,7 +20,7 @@ public class CPFValidator extends AbstractValidator<String> {
 	private static final int CPF_LENGTH = 11;
 	private static final int CPF_WITH_MASK_LENGTH = 14;
 	private static final int CPF_WITHOUT_CHECKED_NUMBER_LENGTH = 9;
-	
+
 	private List<String> notValidSet;
 	private PatternValidator numberValidator;
 
@@ -47,17 +48,17 @@ public class CPFValidator extends AbstractValidator<String> {
 		sum = CPF_LENGTH - sum % CPF_LENGTH;
 		return sum > CPF_WITHOUT_CHECKED_NUMBER_LENGTH ? 0 : sum;
 	}
-	
+
 	private void validateLength(String cpf) {
 		if (cpf.length() != CPF_LENGTH && cpf.length() != CPF_WITH_MASK_LENGTH) {
 			throw new LenghtException();
 		}
 	}
-	
+
 	private boolean containMask(String cpf) {
 		return cpf.length() == CPF_WITH_MASK_LENGTH;
 	}
-	
+
 	private String removeMask(String cpf) {
 		return cpf.replaceAll("[.-]", "");
 	}
@@ -71,40 +72,44 @@ public class CPFValidator extends AbstractValidator<String> {
 	 * @param value
 	 *            String. Valor a ser validado;
 	 * 
+	 * @exception InvalidArgumentException
+	 * 				Exceção lancada quando o parâmetro é inválido.
+	 * 				Exemplo: Valor nulo;
 	 * @exception LenghtException
 	 *                Exceção lançada quando o parâmetro não possui o tamanho
 	 *                adequado, 11 ou 14 caracteres;
-	 * 
 	 * @exception FormatException
 	 *                Exceção lançada quando o parâmetro é composto por letras
 	 *                ou caracteres que não condizem com um CPF;
-	 * 
 	 * @exception CPFCharSetException
 	 *                Exceção lançada quando o parâmetro é composto por números
 	 *                sequenciais;
-	 * 
 	 * @exception InvalidCPFException
 	 *                Exceção lançada quando o parâmetro não condiz com um CPF
 	 *                válido;
 	 */
 	@Override
 	protected void validate(String cpf) {
-		this.validateLength(cpf);
-		
-		String cpfNumber = this.containMask(cpf) ? this.removeMask(cpf) : cpf;
+		if (cpf == null) {
+			throw new InvalidArgumentException();
+		} else {
+			this.validateLength(cpf);
 
-		this.numberValidator.doValidation(cpfNumber);
+			String cpfNumber = this.containMask(cpf) ? this.removeMask(cpf) : cpf;
 
-		if (this.notValidSet.contains(cpfNumber)) {
-			throw new CPFCharSetException();
-		}
+			this.numberValidator.doValidation(cpfNumber);
 
-		String cpfWithoutCheckedNumber = cpfNumber.substring(0, CPF_WITHOUT_CHECKED_NUMBER_LENGTH);
-		int checkedDigit1 = calculateDigitValue(cpfWithoutCheckedNumber);
-		int checkedDigit2 = calculateDigitValue(cpfWithoutCheckedNumber + checkedDigit1);
+			if (this.notValidSet.contains(cpfNumber)) {
+				throw new CPFCharSetException();
+			}
 
-		if (!cpfNumber.equals(cpfWithoutCheckedNumber + checkedDigit1 + checkedDigit2)) {
-			throw new InvalidCPFException();
+			String cpfWithoutCheckedNumber = cpfNumber.substring(0, CPF_WITHOUT_CHECKED_NUMBER_LENGTH);
+			int checkedDigit1 = calculateDigitValue(cpfWithoutCheckedNumber);
+			int checkedDigit2 = calculateDigitValue(cpfWithoutCheckedNumber + checkedDigit1);
+
+			if (!cpfNumber.equals(cpfWithoutCheckedNumber + checkedDigit1 + checkedDigit2)) {
+				throw new InvalidCPFException();
+			}
 		}
 	}
 

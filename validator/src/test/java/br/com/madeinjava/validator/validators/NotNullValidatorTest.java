@@ -29,7 +29,7 @@ public class NotNullValidatorTest {
 		Object value = new Object();
 		assertTrue(this.validator.isValid(value));
 	}
-
+	
 	@Test(expected = NullValueException.class)
 	public void throwNullValueException() {
 		Object value = null;
