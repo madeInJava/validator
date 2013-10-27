@@ -7,7 +7,7 @@ public class Validator {
 
 	private static AbstractValidator<String> notNullAndNotEmptyValidator;
 
-	public AbstractValidator<String> notNullAndNotEmptyValidator() {
+	public static AbstractValidator<String> notNullAndNotEmptyValidator() {
 		if (notNullAndNotEmptyValidator == null) {
 			notNullAndNotEmptyValidator = new ValidatorBuilder<String>()
 					.withValidator(new NotNullValidator<String>())
