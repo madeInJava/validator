@@ -5,22 +5,17 @@ import br.com.madeinjava.validator.exceptions.general.EmptyValueException;
 import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 
 /**
+ * NotEmptyValidator.
+ *
  * @author Renan JP
  * @version 1.0.0
  */
 public class NotEmptyValidator extends AbstractValidator<String> {
 
 	/**
-	 * Método responsável por validar se uma String não está vazia;
-	 * 
-	 * @param value
-	 *            String. Valor a ser validado;
-	 * 
-	 * @exception InvalidArgumentException
-	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
-	 *                Valor nulo;
-	 * @exception EmptyValueException
-	 *                Exceção lançada quando o parâmetro está vazio;
+	 * Método responsável por validar se uma String não está vazia;.
+	 *
+	 * @param value String. Valor a ser validado;
 	 */
 	@Override
 	public void validate(String value) {

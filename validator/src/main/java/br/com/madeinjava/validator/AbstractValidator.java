@@ -11,39 +11,39 @@ import br.com.madeinjava.validator.exceptions.ValidateException;
  * href="http://pt.wikipedia.org/wiki/Template_Method">Template Method</a>.
  * Através deles é possível a criação e associação de validadores;
  * </p>
- * 
+ *
+ * @param <T> Tipagem dinâmica;
  * @author Renan JP
  * @version 1.0.0
- * @param <T>
- *            Tipagem dinâmica;
  */
 public abstract class AbstractValidator<T> {
 
+	/** nex validator. */
 	private AbstractValidator<T> nexValidator;
 
 	/**
-	 * Método responsável pelo encadeamento de validadores;
-	 * 
-	 * @param validator
-	 *            Tipagem dinâmica;
+	 * Método responsável pelo encadeamento de validadores;.
+	 *
+	 * @param validator Tipagem dinâmica;
 	 */
 	public void setNextValidator(AbstractValidator<T> validator) {
 		this.nexValidator = validator;
 	}
 
+	/**
+	 * Obtém n ext validator.
+	 *
+	 * @return n ext validator
+	 */
 	public AbstractValidator<T> getNExtValidator() {
 		return this.nexValidator;
 	}
-	
+
 	/**
 	 * Método responsável por propagar a validação dentre a cadeia de
-	 * validadores;
-	 * 
-	 * @exception ValidateException
-	 *                Exceção lançada quando é encontrada uma não conformidade.
-	 *                Esta exceção pode ser estendida;
-	 * @param value
-	 *            Tipagem dinâmica. Valor a ser validado;
+	 * validadores;.
+	 *
+	 * @param value Tipagem dinâmica. Valor a ser validado;
 	 */
 	public void doValidation(T value) {
 		this.validate(value);
@@ -57,12 +57,11 @@ public abstract class AbstractValidator<T> {
 	 * Método responsável por validar um determinado valor;
 	 * <p>
 	 * Este método utiliza o método {@link AbstractValidator#doValidation(T)};
-	 * </p>
-	 * 
-	 * @param value
-	 *            Tipagem dinâmica. Valor a ser validado;
+	 * </p>.
+	 *
+	 * @param value Tipagem dinâmica. Valor a ser validado;
 	 * @return <b>true</b> para valores válidos e <b>false</b> para valores
-	 *         inválidos;
+	 * inválidos;
 	 */
 	public boolean isValid(T value) {
 		try {
@@ -76,12 +75,11 @@ public abstract class AbstractValidator<T> {
 	/**
 	 * Método template para a validação de valores;
 	 * <p>
-	 * Para que a validação funcione, é necessário lançar exceções baseadas em
+	 * Para que a validação funcione, é necessário lançar exceções baseadas em.
+	 *
+	 * @param value Tipagem dinâmica. Valor a ser validado;
 	 * {@link ValidateException} assim que uma não conformidade for encontrada;
 	 * </p>
-	 * 
-	 * @param value
-	 *            Tipagem dinâmica. Valor a ser validado;
 	 */
 	protected abstract void validate(T value);
 }

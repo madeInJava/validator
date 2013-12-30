@@ -6,13 +6,19 @@ import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.model.Patterns;
 
 /**
+ * EmailValidator.
+ *
  * @author Renan JP
  * @version 1.0.0
  */
 public class EmailValidator extends AbstractValidator<String> {
 
+	/** pattern validator. */
 	private PatternValidator patternValidator;
 
+	/**
+	 * Instancia um novo email validator.
+	 */
 	public EmailValidator() {
 		this.patternValidator = new PatternValidator(Patterns.EMAIL.getPattern());
 	}
@@ -21,17 +27,9 @@ public class EmailValidator extends AbstractValidator<String> {
 	 * Método responsável por validar se o parâmetro em questão é um E-Mail;
 	 * <p>
 	 * Este método utiliza o validador {@link PatternValidator};
-	 * </p>
-	 * 
-	 * @param value
-	 *            String. Valor a ser validado;
-	 * 
-	 * @exception InvalidArgumentException
-	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
-	 *                Valor nulo;
-	 * @exception EmailFormatException
-	 *                Exceção lançada quando o parâmetro não condiz com um
-	 *                E-Mail válido;
+	 * </p>.
+	 *
+	 * @param value String. Valor a ser validado;
 	 */
 	@Override
 	protected void validate(String value) {

@@ -12,23 +12,40 @@ import br.com.madeinjava.validator.exceptions.general.LocaleNotFoundException;
 import br.com.madeinjava.validator.exceptions.monetary.MonetaryFormatException;
 import br.com.madeinjava.validator.model.Locale;
 
+/**
+ * MonetaryValidatorTest.
+ *
+ * @author renan.paula
+ */
 public class MonetaryValidatorTest {
 
+	/** br monetary validator. */
 	private AbstractValidator<String> brMonetaryValidator;
+
+	/** us monetary validator. */
 	private AbstractValidator<String> usMonetaryValidator;
 
+	/**
+	 * Inits the.
+	 */
 	@Before
 	public void init() {
 		this.brMonetaryValidator = new MonetaryValidator();
 		this.usMonetaryValidator = new MonetaryValidator(Locale.EN_US);
 	}
 
+	/**
+	 * Monetary value.
+	 */
 	@Test
 	public void monetaryValue() {
 		assertTrue(this.brMonetaryValidator.isValid("9.999.999,99"));
 		assertTrue(this.usMonetaryValidator.isValid("9,999,999.99"));
 	}
 
+	/**
+	 * Not monetay value.
+	 */
 	@Test
 	public void notMonetayValue() {
 		assertFalse(this.brMonetaryValidator.isValid(""));
@@ -51,17 +68,26 @@ public class MonetaryValidatorTest {
 		assertFalse(this.usMonetaryValidator.isValid("9.999.999.99"));
 		assertFalse(this.usMonetaryValidator.isValid("adsad"));
 	}
-	
+
+	/**
+	 * Throw invalid argument exception.
+	 */
 	@Test(expected = InvalidArgumentException.class)
 	public void throwInvalidArgumentException() {
 		this.usMonetaryValidator.doValidation(null);
 	}
 
+	/**
+	 * Throw locale not found exception.
+	 */
 	@Test(expected = LocaleNotFoundException.class)
 	public void throwLocaleNotFoundException() {
 		new MonetaryValidator(null).doValidation("123,12");
 	}
 
+	/**
+	 * Throw monetary format exception.
+	 */
 	@Test(expected = MonetaryFormatException.class)
 	public void throwMonetaryFormatException() {
 		new MonetaryValidator().doValidation("9.999.999.99");

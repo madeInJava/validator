@@ -13,15 +13,27 @@ import br.com.madeinjava.validator.exceptions.cpf.LenghtException;
 import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.pattern.FormatException;
 
+/**
+ * CPFValidatorTest.
+ *
+ * @author renan.paula
+ */
 public class CPFValidatorTest {
 
+	/** validator. */
 	private AbstractValidator<String> validator;
 
+	/**
+	 * Inits the.
+	 */
 	@Before
 	public void init() {
 		this.validator = new CPFValidator();
 	}
 
+	/**
+	 * Equals charset.
+	 */
 	@Test
 	public void equalsCharset() {
 		assertFalse(this.validator.isValid("00000000000"));
@@ -47,6 +59,9 @@ public class CPFValidatorTest {
 		assertFalse(this.validator.isValid("999.999.999-99"));
 	}
 
+	/**
+	 * Not valid cpf value.
+	 */
 	@Test
 	public void notValidCPFValue() {
 		assertFalse(this.validator.isValid("35135489515"));
@@ -56,6 +71,9 @@ public class CPFValidatorTest {
 		assertFalse(this.validator.isValid("5C5.6P4.5F5-15"));
 	}
 
+	/**
+	 * Valid cpf value.
+	 */
 	@Test
 	public void validCPFValue() {
 		assertTrue(this.validator.isValid("43939271179"));
@@ -64,6 +82,9 @@ public class CPFValidatorTest {
 		assertTrue(this.validator.isValid("031.846.861-16"));
 	}
 
+	/**
+	 * Invalid lenght.
+	 */
 	@Test
 	public void invalidLenght() {
 		assertFalse(this.validator.isValid("439392711"));
@@ -71,27 +92,42 @@ public class CPFValidatorTest {
 		assertFalse(this.validator.isValid("439.392.11-79"));
 		assertFalse(this.validator.isValid("031.846.1-16"));
 	}
-	
+
+	/**
+	 * Throw invalid argument exception.
+	 */
 	@Test(expected = InvalidArgumentException.class)
 	public void throwInvalidArgumentException() {
 		this.validator.doValidation(null);
 	}
 
+	/**
+	 * Throw lenght exception.
+	 */
 	@Test(expected = LenghtException.class)
 	public void throwLenghtException() {
 		this.validator.doValidation("123");
 	}
 
+	/**
+	 * Throw cpf char set exception.
+	 */
 	@Test(expected = CPFCharSetException.class)
 	public void throwCPFCharSetException() {
 		this.validator.doValidation("00000000000");
 	}
 
+	/**
+	 * Throw invalid cpf exception.
+	 */
 	@Test(expected = InvalidCPFException.class)
 	public void throwInvalidCPFException() {
 		this.validator.doValidation("351.354.895-15");
 	}
-	
+
+	/**
+	 * Throw number format exception.
+	 */
 	@Test(expected = FormatException.class)
 	public void throwNumberFormatException() {
 		this.validator.doValidation("3C1.3P4.8F5-15");

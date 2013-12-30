@@ -11,15 +11,27 @@ import br.com.madeinjava.validator.exceptions.general.InvalidArgumentException;
 import br.com.madeinjava.validator.exceptions.interval.InvalidIntervalException;
 import br.com.madeinjava.validator.model.Interval;
 
+/**
+ * IntervalValidatorTest.
+ *
+ * @author renan.paula
+ */
 public class IntervalValidatorTest {
 
+	/** validator. */
 	private AbstractValidator<Interval<Integer>> validator;
 
+	/**
+	 * Inits the.
+	 */
 	@Before
 	public void init() {
 		this.validator = new IntervalValidator<Integer>();
 	}
 
+	/**
+	 * Invalid interval.
+	 */
 	@Test
 	public void invalidInterval() {
 		assertFalse(this.validator.isValid(new Interval<Integer>(2, 1)));
@@ -28,20 +40,29 @@ public class IntervalValidatorTest {
 		assertFalse(this.validator.isValid(new Interval<Integer>(null, null)));
 	}
 
+	/**
+	 * Valid interval.
+	 */
 	@Test
 	public void validInterval() {
 		assertTrue(this.validator.isValid(new Interval<Integer>(0, 0)));
 		assertTrue(this.validator.isValid(new Interval<Integer>(1, 2)));
 	}
-	
+
+	/**
+	 * Throw invalid argument exception.
+	 */
 	@Test(expected = InvalidArgumentException.class)
 	public void throwInvalidArgumentException() {
 		this.validator.doValidation(null);
 	}
 
+	/**
+	 * Throw invalid interval exception.
+	 */
 	@Test(expected = InvalidIntervalException.class)
 	public void throwInvalidIntervalException() {
 		this.validator.doValidation(new Interval<Integer>(null, null));
 	}
-	
+
 }

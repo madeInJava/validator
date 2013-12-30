@@ -7,30 +7,52 @@ import br.com.madeinjava.validator.exceptions.range.OutsideOfRangeException;
 import br.com.madeinjava.validator.model.Interval;
 
 /**
+ * RangeValidator.
+ *
+ * @param <T> Tipagem dinâmica
  * @author Renan JP
  * @version 1.0.0
- * @param <T>
- *            Tipagem dinâmica
  */
 public class RangeValidator<T extends Comparable<T>> extends AbstractValidator<T> {
 
+	/** interval. */
 	private Interval<T> interval;
+
+	/** interval validator. */
 	private IntervalValidator<T> intervalValidator;
 
+	/**
+	 * Instancia um novo range validator.
+	 */
 	public RangeValidator() {
 		super();
 		this.intervalValidator = new IntervalValidator<T>();
 	}
 
+	/**
+	 * Instancia um novo range validator.
+	 *
+	 * @param interval interval
+	 */
 	public RangeValidator(Interval<T> interval) {
 		this();
 		this.interval = interval;
 	}
 
+	/**
+	 * Obtém interval.
+	 *
+	 * @return interval
+	 */
 	public Interval<T> getInterval() {
-		return interval;
+		return this.interval;
 	}
 
+	/**
+	 * Define interval.
+	 *
+	 * @param interval novo interval
+	 */
 	public void setInterval(Interval<T> interval) {
 		this.interval = interval;
 	}
@@ -40,24 +62,9 @@ public class RangeValidator<T extends Comparable<T>> extends AbstractValidator<T
 	 * determinado intervalo;
 	 * <p>
 	 * Este método utiliza o validador {@link IntervalValidator};
-	 * </p>
-	 * 
-	 * @param value
-	 *            Tipagem dinâmica. Valor a ser validado;
-	 * 
-	 * @exception InvalidArgumentException
-	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
-	 *                Valor nulo;
-	 * @exception IntervalNotFoundException
-	 *                Exceção lançada quando o intervalo não é definido
-	 *                previamente a invocação deste método. Para definir o
-	 *                intervalo utilize os métodos de acesso (getInterval e
-	 *                setInterval) ou o construtor parametrizado;
-	 * @exception InvalidIntervalException
-	 *                Exceção lançada quando o interválo não é válido;
-	 * @exception OutsideOfRangeException
-	 *                Exceção lançada quando o parâmetro não está dentro o
-	 *                intervalo definido;
+	 * </p>.
+	 *
+	 * @param value Tipagem dinâmica. Valor a ser validado;
 	 */
 	@Override
 	protected void validate(T value) {
@@ -69,7 +76,7 @@ public class RangeValidator<T extends Comparable<T>> extends AbstractValidator<T
 			this.intervalValidator.doValidation(this.interval);
 			T initialValue = this.interval.getInitialValue();
 			T finalValue = this.interval.getFinalValue();
-			if (initialValue.compareTo(value) > 0 || finalValue.compareTo(value) < 0) {
+			if ((initialValue.compareTo(value) > 0) || (finalValue.compareTo(value) < 0)) {
 				throw new OutsideOfRangeException();
 			}
 		}

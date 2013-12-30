@@ -8,49 +8,56 @@ import br.com.madeinjava.validator.exceptions.pattern.FormatException;
 import br.com.madeinjava.validator.exceptions.pattern.PatternNotFound;
 
 /**
+ * PatternValidator.
+ *
  * @author Renan JP
  * @version 1.0.0
- * @param <T>
  */
 public class PatternValidator extends AbstractValidator<String> {
 
+	/** pattern. */
 	private Pattern pattern;
 
+	/**
+	 * Instancia um novo pattern validator.
+	 */
 	public PatternValidator() {
 		super();
 	}
 
+	/**
+	 * Instancia um novo pattern validator.
+	 *
+	 * @param pattern pattern
+	 */
 	public PatternValidator(Pattern pattern) {
 		super();
 		this.pattern = pattern;
 	}
 
+	/**
+	 * Obtém pattern.
+	 *
+	 * @return pattern
+	 */
 	public Pattern getPattern() {
-		return pattern;
+		return this.pattern;
 	}
 
+	/**
+	 * Define pattern.
+	 *
+	 * @param pattern novo pattern
+	 */
 	public void setPattern(Pattern pattern) {
 		this.pattern = pattern;
 	}
 
 	/**
 	 * Método responsável por validar se o parâmetro em questão equivale a um
-	 * determinado padrão;
-	 * 
-	 * @param value
-	 *            String. Valor a ser validado;
-	 * 
-	 * @exception InvalidArgumentException
-	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
-	 *                Valor nulo;
-	 * @exception PatternNotFound
-	 *                Exceção lançada quando o pattern não é definido
-	 *                previamente a invocação deste método. Para definir o
-	 *                pattern utilize os métodos de acesso (getPattern e
-	 *                setPattern) ou o construtor parametrizado;
-	 * @exception FormatException
-	 *                Exceção lançada quando o parâmetro não condiz com o
-	 *                padrão;
+	 * determinado padrão;.
+	 *
+	 * @param value String. Valor a ser validado;
 	 */
 	@Override
 	public void validate(String value) {

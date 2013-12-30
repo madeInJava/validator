@@ -6,24 +6,18 @@ import br.com.madeinjava.validator.exceptions.interval.InvalidIntervalException;
 import br.com.madeinjava.validator.model.Interval;
 
 /**
+ * IntervalValidator.
+ *
+ * @param <T> Tipagem dinâmica
  * @author Renan JP
  * @version 1.0.0
- * @param <T>
- *            Tipagem dinâmica
  */
 public class IntervalValidator<T extends Comparable<T>> extends AbstractValidator<Interval<T>> {
 
 	/**
-	 * Método responsável por validar um determinado intervalo;
-	 * 
-	 * @param value
-	 *            Intervalo com tipagem dinâmica. Valor a ser validado;
-	 * 
-	 * @exception InvalidArgumentException
-	 *                Exceção lancada quando o parâmetro é inválido. Exemplo:
-	 *                Valor nulo;
-	 * @exception InvalidIntervalException
-	 *                Exceção lançada quando o interválo não é válido;
+	 * Método responsável por validar um determinado intervalo;.
+	 *
+	 * @param value Intervalo com tipagem dinâmica. Valor a ser validado;
 	 */
 	@Override
 	protected void validate(Interval<T> value) {
@@ -32,7 +26,7 @@ public class IntervalValidator<T extends Comparable<T>> extends AbstractValidato
 		} else {
 			T initialValue = value.getInitialValue();
 			T finalValue = value.getFinalValue();
-			if (initialValue == null || finalValue == null || initialValue.compareTo(finalValue) > 0) {
+			if ((initialValue == null) || (finalValue == null) || (initialValue.compareTo(finalValue) > 0)) {
 				throw new InvalidIntervalException();
 			}
 		}
