@@ -8,7 +8,7 @@ import br.com.madeinjava.validator.validators.NotNullValidator;
  *
  * @author renan.paula
  */
-public class Validator {
+public abstract class Validator {
 
 	/** not null and not empty validator. */
 	private static AbstractValidator<String> notNullAndNotEmptyValidator;
